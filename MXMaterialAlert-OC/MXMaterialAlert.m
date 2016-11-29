@@ -54,7 +54,7 @@
 }
 
 - (void)addButton:(MXMaterialAlertButton *)button {
-    if (button) {
+    if (button != nil) {
         [self.materialAlertView.buttons addObject:button];
     }
 }
@@ -206,3 +206,65 @@
     [self setFinished:YES];
 }
 @end
+
+
+@implementation MXMaterialAlert (Quick)
+
++ (void)alert:(NSString *)title info:(NSString *)info button:(NSString *)buttonTitle action:(MXMaterialAlertActionBlock)onClickListener {
+    
+    [MXMaterialAlert alert:title info:info positive:buttonTitle negative:nil action:onClickListener];
+}
+
++ (void)alert:(NSString *)title info:(NSString *)info positive:(NSString *)positive negative:(NSString *)negative action:(MXMaterialAlertActionBlock)onClickListener {
+    
+    MXMaterialAlert *material = [MXMaterialAlert makeWithTitle:title defail:info];
+    
+    if (negative) {
+        [material addButton:negative forType:MXMaterialAlertButtonTypeCancel];
+    }
+    [material addButton:positive forType:MXMaterialAlertButtonTypeConfirm];
+    
+    [material setOnClickListener:onClickListener];
+    
+    [material show];
+}
+
++ (void)alert:(NSString *)title info:(NSString *)info action:(MXMaterialAlertActionBlock)onClickListener forButtons:(NSString *)firstButton, ... {
+    
+    NSMutableArray <NSString *>*titles = [NSMutableArray array];
+    [titles addObject:firstButton];
+    
+    va_list argumentList;
+    va_start(argumentList, firstButton);
+    NSString *eachTitle = va_arg(argumentList, id);
+    while (eachTitle) {
+        [titles addObject:eachTitle];
+        eachTitle = va_arg(argumentList, id);
+    }
+    va_end(argumentList);
+    
+    [MXMaterialAlert alert:title info:info buttons:titles action:onClickListener];
+}
+
++ (void)alert:(NSString *)title info:(NSString *)info buttons:(NSArray<NSString *> *)buttons action:(MXMaterialAlertActionBlock)onClickListener {
+    
+    if (buttons == nil || buttons.count < 1) {
+        [MXMaterialAlert alert:title info:info button:@"确定" action:onClickListener];
+    } else if (buttons.count == 1) {
+        [MXMaterialAlert alert:title info:info button:[buttons firstObject] action:onClickListener];
+    } else {
+        MXMaterialAlert *material = [MXMaterialAlert makeWithTitle:title defail:info];
+        
+        for (NSString *title in buttons) {
+            [material addButton:title forType:MXMaterialAlertButtonTypeCustom];
+        }
+        [material setOnClickListener:onClickListener];
+        
+        [material show];
+    }
+    
+}
+
+@end
+
+

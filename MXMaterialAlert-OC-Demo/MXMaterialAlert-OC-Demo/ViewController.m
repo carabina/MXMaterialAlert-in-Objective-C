@@ -20,6 +20,16 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [MXMaterialAlert alert:@"提示" info:@"点这里到什么地方呢？好像没出可去啊，哈哈哈哈哈哈哈😁" button:@"知道了" action:^(NSString *title, NSUInteger index) {
+        [MXMaterialAlert alert:@"第二个提示" info:@"有两个按钮，恩恩" positive:@"知道了" negative:@"好吧" action:^(NSString * buttonTitle, NSUInteger buttonIndex) {
+            [MXMaterialAlert alert:@"第三个提示" info:@"最多可以有无数个按钮😂\n真的！" action:nil forButtons:@"第一个按钮", @"第二个按钮", @"第三个按钮", @"第四个按钮", @"第五个按钮", @"第六个按钮", @"第七个按钮", nil];
+        }];
+    }];
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     MXMaterialAlert *material = [MXMaterialAlert makeWithTitle:@"提示框" format:@"這是一個提示框，hahahahahha哈哈哈哈哈哈😄", arc4random_uniform(999)];
     [material addButton:@"Confirm" forType:MXMaterialAlertButtonTypeConfirm];

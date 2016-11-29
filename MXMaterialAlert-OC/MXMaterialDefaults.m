@@ -125,6 +125,13 @@
     return _defaultBackgroundColor;
 }
 
+- (CGFloat )maxWidth {
+    if (_maxWidth <= 1) {
+        _maxWidth = 296.0f;
+    }
+    return _maxWidth;
+}
+
 #pragma mark - value getters
 /**
  * @brief Gunsmoke Color

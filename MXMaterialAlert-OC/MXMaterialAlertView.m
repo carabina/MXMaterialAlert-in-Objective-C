@@ -105,7 +105,13 @@ const CGFloat kMXMaterialAlertButtonHeight = 37.0f;
     CGSize containerSize = [[MXMaterialAlertWindow defaultWindow] frame].size;
     CGSize constraintSize = CGSizeMake(containerSize.width * (280.0f / 320.0f), CGFLOAT_MAX);
     
-    CGFloat backgroundWidth = constraintSize.width;
+    CGFloat backgroundWidth;
+    
+    if (containerSize.width > [[MXMaterialDefaults standardDefaults] maxWidth]) {
+        backgroundWidth = [[MXMaterialDefaults standardDefaults] maxWidth];
+    } else {
+        backgroundWidth = constraintSize.width;
+    }
     
     CGFloat buttonHeight = kMXMaterialAlertButtonHeight;
     CGFloat buttonWidth;

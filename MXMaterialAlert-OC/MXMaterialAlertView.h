@@ -10,6 +10,12 @@
 #import "MXMaterialAlertShadowView.h"
 #import "MXMaterialAlertButton.h"
 
+/**
+ *  Set MXMaterialAlert Action Button Title and Click Action
+ *
+ *  @param buttonTitle Title of clicked button
+ *  @param buttonIndex Index of clicked button
+ */
 typedef void (^MXMaterialAlertActionBlock) (NSString *_Nonnull buttonTitle, NSUInteger buttonIndex);
 
 @interface MXMaterialAlertView : UIView

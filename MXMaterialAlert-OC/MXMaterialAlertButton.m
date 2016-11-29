@@ -138,13 +138,13 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, 1.0f);
+    CGFloat lineWidth = 0.5f;
+    CGContextSetLineWidth(ctx, lineWidth);
     CGContextSetStrokeColorWithColor(ctx, [MXMaterialDefaults standardDefaults].defaultPositiveButtonColor.CGColor);
     CGContextBeginPath(ctx);
-    CGFloat half = 0.5f;
-    CGFloat whole = 1.0f;
+    CGFloat half = 0.5f * lineWidth;
     CGContextMoveToPoint(ctx, half, half);
-    CGContextAddLineToPoint(ctx, self.bounds.size.width - whole, half);
+    CGContextAddLineToPoint(ctx, self.bounds.size.width - lineWidth, half);
     CGContextDrawPath(ctx, kCGPathStroke);
     CGContextClosePath(ctx);
 }

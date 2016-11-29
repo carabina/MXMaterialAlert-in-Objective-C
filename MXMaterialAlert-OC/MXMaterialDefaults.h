@@ -48,5 +48,7 @@
 @property (nonatomic, copy) UIColor * _Nonnull defaultSeparatorColor;
 @property (nonatomic, copy) UIColor * _Nonnull defaultBackgroundColor;
 
+@property (nonatomic, assign) CGFloat maxWidth;
+
 + (instancetype _Nonnull)standardDefaults;
 @end
